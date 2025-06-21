@@ -33,32 +33,33 @@ function LogoTitle({ children, title }: LogoTitleProps) {
 export default function RootLayout() {
   // (optional) define each screen's options here
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerTitle: (props) => <LogoTitle />,
+        headerStyle: { backgroundColor: "#f4511e" },
+        headerTintColor: "#fff",
+        headerTitleStyle: { fontWeight: "bold" },
+        headerRight: () => (
+          <Pressable
+            onPress={() => alert("This is a button!")}
+            style={{ padding: 10 }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Info</Text>
+          </Pressable>
+        ),
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{
+          // This will be overridden by the "headerTitle" option
           title: "Home",
-          headerRight: () => (
-            <Pressable
-              onPress={() => alert("This is a button!")}
-              style={{ padding: 10 }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Info</Text>
-            </Pressable>
-          ),
-          headerTitle: (props) => <LogoTitle />,
-          headerStyle: { backgroundColor: "#f4511e" },
-          headerTintColor: "#fff",
-          headerTitleStyle: { fontWeight: "bold" },
         }}
       />
       <Stack.Screen
         name="about"
         options={{
           title: "About",
-          headerStyle: { backgroundColor: "#f4511e" },
-          headerTintColor: "#fff",
-          headerTitleStyle: { fontWeight: "bold" },
         }}
       />
     </Stack>
